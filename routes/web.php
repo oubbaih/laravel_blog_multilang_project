@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashBoardController as ControllersDashBoardController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +22,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/dashboard',  function () {
-    return view('dashboard.index');
-})->name('dashboard');
+// DashBoard Routes Group
+Route::prefix('dashboard')->as('dashboard.')->middleware('auth')->group(function () {
+    Route::get('/', DashboardController::class . '@index')->name('dashboard');
+    // Dashboard Post ()
+    Route::resource('post', PostController::class);
+});
 
 
 

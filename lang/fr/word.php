@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+  'dashboard' => 'tableau de bord'
+];

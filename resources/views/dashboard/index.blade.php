@@ -1,7 +1,7 @@
 <x-dashboard-master>
 
     @section('main')
-     <main class="main">
+  
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Home</li>
@@ -1636,7 +1636,6 @@
                 </div>
             </div>
             <!--/.container-fluid-->
-        </main>
         
     @endsection
 
