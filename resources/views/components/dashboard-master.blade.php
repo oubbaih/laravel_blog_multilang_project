@@ -179,9 +179,13 @@
 
 
         <!-- Main content -->
-           <main class="main">
+             <main class="main">
                <div class="container-fluid">
-                   @yield('main')
+                   <div class="breadcrumb">
+                       <div class="row">
+                            @yield('main')
+                       </div>
+                    </div>  
                </div>
            </main>
         {{-- End Main Content  --}}

@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostTranslation extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['title', 'content'];
 }
