@@ -1,9 +1,10 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -39,8 +40,9 @@ class PostController extends Controller
     {
         //
         // dd($request->all());
-        $input = $request->only('username', 'password');
-        Post::create($input);
+        // $input = $request->only('title', 'content');
+        Post::create($request->all());
+
         return back();
     }
 
