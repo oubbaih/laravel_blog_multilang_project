@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashBoardController as ControllersDashBoardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::prefix('dashboard')->as('dashboard.')->middleware('auth')->group(function
     Route::get('/', DashboardController::class . '@index')->name('dashboard');
     // Dashboard Post ()
     Route::resource('post', PostController::class);
+    // User
+    Route::resource('user', UserController::class);
 });
 
 

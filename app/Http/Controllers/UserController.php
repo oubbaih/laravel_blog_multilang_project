@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
 
-class PostController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        return view('dashboard.post.index', compact('posts'));
+        return view('dashboard.users.index');
     }
 
     /**
@@ -28,7 +25,6 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('dashboard.post.create');
     }
 
     /**
@@ -40,10 +36,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
-        Post::create($request->all());
-
-        return back();
     }
 
     /**

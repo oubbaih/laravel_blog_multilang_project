@@ -24,6 +24,8 @@
         <link href="{{asset('css/simple-line-icons.css')}}"" rel="stylesheet" />
         <!-- Main styles for this application -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet" />
+        @yield('styles')
+
     </head>
     <!-- BODY options, add following classes to body to change options
 		1. 'compact-nav'     	  - Switch sidebar to minified version (width 50px)
@@ -678,14 +680,14 @@
 
         <footer class="footer">
             <span class="text-left">
-                <a href="http://coreui.io">CoreUI</a> &copy; 2016 creativeLabs.
+                <a href="#">Lahcen</a> &copy; 2016 lahcenoubbaih.
             </span>
             <span class="pull-right">
-                Powered by <a href="http://coreui.io">CoreUI</a>
+                Powered by <a href="#">Lahcen Oubbaih</a>
             </span>
         </footer>
         <!-- Bootstrap and necessary plugins -->
-        <script src="{{asset('js/libs/jquery.min.js')}}"></script>
+        <script src="{{asset('js/jquery.js')}}"></script>
         <script src="{{asset('js/libs/tether.min.js')}}"></script>
         <script src="{{asset('js/libs/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/libs/pace.min.js')}}"></script>
@@ -703,6 +705,7 @@
 
         <!-- Grunt watch plugin -->
         <!-- <script src="//localhost:35729/livereload.js"></script> -->
+         @yield('scripts')
     </body>
 </html>
    
