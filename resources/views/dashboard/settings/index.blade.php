@@ -1,4 +1,5 @@
 <x-dashboard-master>
+
     @section('main')
     <form action="{{route('dashboard.setting.update' , $settings)}}" method="post" enctype="multipart/form-data">
         @csrf
@@ -15,7 +16,7 @@
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Facebook Link" name="facebook"
-                                type="text" value="{{$settings->facebook}}">
+                                type="text" value="{{$settings->facebook }}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Instagram</label>
@@ -36,7 +37,7 @@
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Youtube Link" name="youtube"
-                                type="text"  value="{{$settings->youtube}}">
+                                type="text"  value="{{$settings->youtube }}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">TikTok</label>
@@ -51,7 +52,7 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
                                 type="file">
-                             <img src="{{asset($setting->logo)}}" class="img-fluid" alt="">   
+                             <img src="{{asset($settings->logo)}}" class="img-fluid" alt="">   
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Favicon</label>
@@ -59,14 +60,14 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="favicon"
                                 type="file">
-                                    <img src="{{asset($setting->logo)}}" class="img-fluid" alt="">  
+                                    <img src="{{asset($settings->favicon) }}" class="img-fluid" alt="">  
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Email</label>
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Email Link" name="gmail"
-                                type="email"  value="{{$setting->gmail}}">
+                                type="email"  value="{{$settings->gmail}}">
                         </div>
                     </div>
                 </div>
@@ -98,7 +99,7 @@
                                 _{{$key}}</label>
                             <div class="controls">
                                 <div class="input-group">
-                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text" value="{{$setting->translate($ket)->title}}">
+                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text" value="{{$settings->translate($key)->title }}">
                                 </div>
                             </div>
                             <label class="form-control-label" style="margin-top:2rem;" for="postContentid">Post
@@ -106,7 +107,7 @@
                             <div class="controls">
                                 <div class="input-group">
                                     <textarea id="postContentid" class="form-control" name="{{$key}}[content]"
-                                        rows=25>{{$setting->translate($key)->content}}</textarea>
+                                        rows=25>{{$settings->translate($key)->content}}</textarea>
                                 </div>
                             </div>
                         </div>
