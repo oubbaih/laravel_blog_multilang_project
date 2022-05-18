@@ -32,6 +32,7 @@ Route::prefix('dashboard')->as('dashboard.')->middleware('auth')->group(function
     // User
     Route::resource('user', UserController::class);
     //Settings 
+    Route::put('setting/{setting}', SettingController::class . '@update')->name('setting.update');
     Route::get('setting', SettingController::class . '@index')->name('setting.index');
 });
 

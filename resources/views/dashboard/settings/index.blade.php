@@ -1,6 +1,6 @@
 <x-dashboard-master>
     @section('main')
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route('dashboard.setting.update' , $settings)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="col-lg-12">
@@ -15,56 +15,58 @@
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Facebook Link" name="facebook"
-                                type="text">
+                                type="text" value="{{$settings->facebook}}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Instagram</label>
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Instagram Link" name="instagram"
-                                type="text">
+                                type="text" value="{{$settings->instagram}}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Twitter</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Twitter Link" name="iwitter"
-                                type="text">
+                            <input id="posttitleid" class="form-control" placeholder="Twitter Link" name="twitter"
+                                type="text" value="{{$settings->twitter}}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Youtube</label>
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Youtube Link" name="youtube"
-                                type="text">
+                                type="text"  value="{{$settings->youtube}}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">TikTok</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="TikTok Link" name="tikTok"
-                                type="text">
+                            <input id="posttitleid" class="form-control" placeholder="TikTok Link" name="tiktok"
+                                type="text" value="{{$settings->tiktok}}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Logo</label>
                     <div class="controls">
-                        <div class="input-group">
+                        <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
                                 type="file">
+                             <img src="{{asset($setting->logo)}}" class="img-fluid" alt="">   
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Favicon</label>
                     <div class="controls">
-                        <div class="input-group">
+                        <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="favicon"
                                 type="file">
+                                    <img src="{{asset($setting->logo)}}" class="img-fluid" alt="">  
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Email</label>
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Email Link" name="gmail"
-                                type="email">
+                                type="email"  value="{{$setting->gmail}}">
                         </div>
                     </div>
                 </div>
@@ -96,7 +98,7 @@
                                 _{{$key}}</label>
                             <div class="controls">
                                 <div class="input-group">
-                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text">
+                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text" value="{{$setting->translate($ket)->title}}">
                                 </div>
                             </div>
                             <label class="form-control-label" style="margin-top:2rem;" for="postContentid">Post
@@ -104,7 +106,7 @@
                             <div class="controls">
                                 <div class="input-group">
                                     <textarea id="postContentid" class="form-control" name="{{$key}}[content]"
-                                        rows=25></textarea>
+                                        rows=25>{{$setting->translate($key)->content}}</textarea>
                                 </div>
                             </div>
                         </div>

@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div class="row">
+        <div class="col-md-8 m-x-auto pull-xs-none vamiddle" style="width:50%">
+            <div class="card-group ">
+                <div class="card p-a-2">
                 <div class="card-header">{{ __('Register') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
+            $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('twitter')->nullable();
