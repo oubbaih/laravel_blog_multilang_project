@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashBoardController as ControllersDashBoardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -30,6 +31,8 @@ Route::prefix('dashboard')->as('dashboard.')->middleware('auth')->group(function
     Route::resource('post', PostController::class);
     // User
     Route::resource('user', UserController::class);
+    //Settings 
+    Route::get('setting', SettingController::class . '@index')->name('setting.index');
 });
 
 
