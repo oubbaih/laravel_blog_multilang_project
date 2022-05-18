@@ -4,6 +4,16 @@
     <form action="{{route('dashboard.setting.update' , $settings)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="col-lg-12">
             <div class="card">
 
@@ -37,7 +47,7 @@
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Youtube Link" name="youtube"
-                                type="text"  value="{{$settings->youtube }}">
+                                type="text" value="{{$settings->youtube }}">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">TikTok</label>
@@ -52,7 +62,7 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
                                 type="file">
-                             <img src="{{asset($settings->logo)}}" class="img-fluid" alt="">   
+                            <img src="{{asset($settings->logo)}}" class="img-fluid" alt="">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Favicon</label>
@@ -60,14 +70,14 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="favicon"
                                 type="file">
-                                    <img src="{{asset($settings->favicon) }}" class="img-fluid" alt="">  
+                            <img src="{{asset($settings->favicon) }}" class="img-fluid" alt="">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Email</label>
                     <div class="controls">
                         <div class="input-group">
                             <input id="posttitleid" class="form-control" placeholder="Email Link" name="gmail"
-                                type="email"  value="{{$settings->gmail}}">
+                                type="email" value="{{$settings->gmail}}">
                         </div>
                     </div>
                 </div>
@@ -95,15 +105,16 @@
                             show active in
                              @endif" id="{{$key}}" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                             <input type="hidden" name="author" value={{auth()->user()->id}}>
-                            <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Post Title
+                            <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Website Title
                                 _{{$key}}</label>
                             <div class="controls">
                                 <div class="input-group">
-                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text" value="{{$settings->translate($key)->title }}">
+                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text"
+                                        value="{{$settings->translate($key)->title }}">
                                 </div>
                             </div>
-                            <label class="form-control-label" style="margin-top:2rem;" for="postContentid">Post
-                                Content</label>
+                            <label class="form-control-label" style="margin-top:2rem;" for="postContentid">Website
+                                Description</label>
                             <div class="controls">
                                 <div class="input-group">
                                     <textarea id="postContentid" class="form-control" name="{{$key}}[content]"
@@ -129,14 +140,14 @@
     </form>
     @endsection
 
-        @section('scripts')
+    @section('scripts')
     <script>
         function resetFun(e) {
             let inputsText = document.querySelectorAll('input[type=text]');
             let inputsFile = document.querySelectorAll('input[type=file]');
             let inputEmail = document.querySelector('input[type=email]');
             let inputsTextarea = document.querySelectorAll('textarea');
-            let inputArea = [...inputsText, ...inputsFile , inputEmail , ...inputsTextarea];
+            let inputArea = [...inputsText, ...inputsFile, inputEmail, ...inputsTextarea];
             e.preventDefault();
             for (let element of inputArea) {
                 element.value = '';
