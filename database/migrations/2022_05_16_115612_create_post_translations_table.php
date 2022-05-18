@@ -17,8 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('post_id')->unsigned();
             $table->string('locale')->index();
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('excerpt')->nullable();
+            $table->text('content')->nullable();
             $table->unique(['post_id', 'locale']);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });

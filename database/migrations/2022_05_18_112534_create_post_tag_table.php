@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('post_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('logo')->nullable();
-            $table->string('favicon')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('tiktok')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('gmail')->nullable();
-            $table->string('youtube')->nullable();
+            $table->integer('post_id');
+            $table->integer('tag_id');
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('post_tag');
     }
 };
