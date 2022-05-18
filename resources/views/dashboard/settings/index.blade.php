@@ -21,43 +21,50 @@
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Instagram</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Instagram Link" name="Instagram"
+                            <input id="posttitleid" class="form-control" placeholder="Instagram Link" name="instagram"
                                 type="text">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Twitter</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Twitter Link" name="Twitter"
+                            <input id="posttitleid" class="form-control" placeholder="Twitter Link" name="iwitter"
                                 type="text">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Youtube</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Youtube Link" name="Youtube"
+                            <input id="posttitleid" class="form-control" placeholder="Youtube Link" name="youtube"
                                 type="text">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">TikTok</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="TikTok Link" name="TikTok"
+                            <input id="posttitleid" class="form-control" placeholder="TikTok Link" name="tikTok"
                                 type="text">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Logo</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Logo Link" name="Logo"
+                            <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
                                 type="file">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Favicon</label>
                     <div class="controls">
                         <div class="input-group">
-                            <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="Favicon"
+                            <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="favicon"
                                 type="file">
+                        </div>
+                    </div>
+                    <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Email</label>
+                    <div class="controls">
+                        <div class="input-group">
+                            <input id="posttitleid" class="form-control" placeholder="Email Link" name="gmail"
+                                type="email">
                         </div>
                     </div>
                 </div>
@@ -116,14 +123,24 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
     </form>
+    @endsection
+
+        @section('scripts')
+    <script>
+        function resetFun(e) {
+            let inputsText = document.querySelectorAll('input[type=text]');
+            let inputsFile = document.querySelectorAll('input[type=file]');
+            let inputEmail = document.querySelector('input[type=email]');
+            let inputsTextarea = document.querySelectorAll('textarea');
+            let inputArea = [...inputsText, ...inputsFile , inputEmail , ...inputsTextarea];
+            e.preventDefault();
+            for (let element of inputArea) {
+                element.value = '';
+            }
+        }
+
+    </script>
+
     @endsection
 </x-dashboard-master>
