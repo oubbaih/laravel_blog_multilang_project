@@ -1,15 +1,15 @@
 <x-dashboard-master>
     @section('styles')
-       <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTable.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTable.min.css') }}">
     @endsection
-  @section('main') 
+    @section('main')
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Combined All Table
             </div>
             <div class="card-block">
-                <table class="table table-bordered table-striped table-condensed" id="example">
+                <table class="table-bordered table-striped table-condensed table" id="example">
                     <thead>
                         <tr>
                             <th>Username</th>
@@ -64,16 +64,16 @@
             </div>
         </div>
     </div>
-</div>
-  @endsection
-  @section('scripts')
-      <script type="text/javascript" charset="utf8" src="{{asset('js/jquery.js')}}"></script>
-      <script type="text/javascript" charset="utf8" src="{{asset('js/jquery.dataTable.min.js')}}"></script>
+    @endsection
+    @section('scripts')
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.dataTable.min.js') }}"></script>
 
-      <script>
+    <script>
         $(document).ready(function () {
             $('#example').dataTable();
         });
-      </script>
-  @endsection
+
+    </script>
+    @endsection
 </x-dashboard-master>
