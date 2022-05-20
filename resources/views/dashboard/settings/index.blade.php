@@ -1,27 +1,28 @@
 <x-dashboard-master>
 
     @section('main')
-    <form action="{{route('dashboard.setting.update' , $settings)}}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
 
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="{{route('dashboard.setting.update' , $settings)}}" method="POST" enctype="multipart/form-data">-
+    @csrf
+    @method('PUT')
         <div class="col-lg-12">
             <div class="card">
-
                 <h6 class="card-header text-capitalize">
                     <i class="fa fa-align-justify"></i>
                     Website Social Media Settings
                 </h6>
-                <div style="padding:0rem 1.5rem 1.5rem 1.5rem;;">
+                <div style="padding:0rem 1.5rem 1.5rem 1.5rem;">
+
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">FaceBook</label>
                     <div class="controls">
                         <div class="input-group">
@@ -62,7 +63,7 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
                                 type="file">
-                            <img src="{{asset($settings->logo)}}" class="img-fluid" alt="">
+                            <img src="{{asset($settings->logo)}}" style="width:200px;" alt="">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Favicon</label>
@@ -70,7 +71,7 @@
                         <div class="input-group d-flex">
                             <input id="posttitleid" class="form-control" placeholder="Favicon Link" name="favicon"
                                 type="file">
-                            <img src="{{asset($settings->favicon) }}" class="img-fluid" alt="">
+                            <img src="{{asset($settings->favicon) }}" style="width:200px;" alt="">
                         </div>
                     </div>
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Email</label>
@@ -83,7 +84,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-12">
             <div class="card">
                 <h6 class="card-header text-capitalize">
