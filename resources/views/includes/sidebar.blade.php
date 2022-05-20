@@ -33,9 +33,6 @@
                       </li>
                   </ul>
               </li>
-
-              {{-- //SetUp Settings  --}}
-              <hr>
                <li class="nav-item nav-dropdown">
                   <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Settings </a>
                   <ul class="nav-dropdown-items">

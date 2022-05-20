@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -11,9 +13,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function CheckAllUsers()
+    {
+        $data = User::select('*');
+        return   DataTables::of($data)
+            ->addIndexColumn()
+
+
+
+
+            ->make(true);
+    }
     public function index()
     {
-        //
+
+        // dd($users);
         return view('dashboard.users.index');
     }
 

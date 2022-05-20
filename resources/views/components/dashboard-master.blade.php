@@ -712,6 +712,9 @@
         <!-- Custom scripts required by this view -->
         <script src="{{asset('js/views/main.js')}}"></script>
 
+                {{-- Yarja DataTable Script SetUp --}}
+                @stack('javascript')
+
         <!-- Grunt watch plugin -->
         <!-- <script src="//localhost:35729/livereload.js"></script> -->
          @yield('scripts')

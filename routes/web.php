@@ -27,12 +27,15 @@ Auth::routes();
 // DashBoard Routes Group
 Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLoginStatus'])->group(function () {
     Route::get('/', DashboardController::class . '@index')->name('dashboard');
-    // Dashboard Post ()
-    Route::resource('post', PostController::class);
-    // User
-    Route::resource('user', UserController::class);
-    //Settings 
-    Route::resource('setting', SettingController::class);
+    Route::get('/users/all', UserController::class . '@CheckAllUsers')->name('users.all');
+    Route::resources([
+        // Dashboard Post ()
+        'post' => PostController::class,
+        // User
+        'user'  => UserController::class,
+        //Settings 
+        'setting' => SettingController::class,
+    ]);
 });
 
 
