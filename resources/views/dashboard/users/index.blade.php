@@ -18,6 +18,8 @@
                             <th>User Status</th>
                             <th>created_at</th>
                             <th>updated_at</th>
+                            <th>Actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +66,10 @@
                     {
                         data:'updated_at',
                         name : 'updated_at',
+                    },
+                    {
+                        data:'actions',
+                        name:'actions',
                     },
                 ]
             });

@@ -18,10 +18,14 @@ class UserController extends Controller
         $data = User::select('*');
         return   DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $btn = '<div style="display:flex;justify-content:space-between;flex-direction:row;"> <a href="' . Route('dashboard.user.edit', $row->id) . '" class="btn btn-primary"> <i class="fa fa-edit"></i>Edit</a>
+                <a href="' . Route('dashboard.user.destroy', $row->id) . '" class="btn btn-danger"> <i class="fa fa-trash"></i>Delete</a></div>';
+                return  $btn;
+            })
 
 
-
-
+            ->rawColumns(['actions'])
             ->make(true);
     }
     public function index()
