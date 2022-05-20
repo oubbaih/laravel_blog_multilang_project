@@ -127,11 +127,11 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <button class="btn btn-primary btn-block " id="submit" style="margin-top:2rem;"
-                                type="submit">submit</button>
+                                type="submit">Updated</button>
                         </div>
                         <div class="col-lg-6">
                             <button class="btn btn-danger btn-block " style="margin-top:2rem;" onclick="resetFun(event)"
-                                type="button" id="reset">reset</button>
+                                type="button" id="reset">Reset</button>
                         </div>
                     </div>
                 </div>

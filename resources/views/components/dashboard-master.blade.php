@@ -150,12 +150,21 @@
                                 ></a
                             >
                             <div class="divider"></div>
+
                             <a class="dropdown-item" href="#"
                                 ><i class="fa fa-shield"></i> Lock Account</a
                             >
-                            <a class="dropdown-item" href="#"
-                                ><i class="fa fa-lock"></i> Logout</a
-                            >
+                            {{-- //Logout Setup --}}
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                     <i class="fa fa-lock"></i>
+                                        {{ __('Logout') }}
+                                    </a>
+                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+
                         </div>
                     </li>
                     <li class="nav-item">
@@ -458,7 +467,7 @@
                             >Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit, sed do eiusmod tempor incididunt...</small
                         >
-                    </div>
+                    </div> 
                     <hr />
                     <div class="message">
                         <div class="p-y-1 p-b-3 m-r-1 pull-left">

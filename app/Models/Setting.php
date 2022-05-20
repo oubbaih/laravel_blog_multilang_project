@@ -12,7 +12,7 @@ class Setting extends Model implements TranslatableContract
     use Translatable;
     use HasFactory;
     public $translatedAttributes = ['title', 'content'];
-    protected $fillable = ['logo', 'favicon', 'instagram', 'tiktok', 'twitter', 'gmail', 'youtube'];
+    protected $fillable = ['facebook', 'logo', 'favicon', 'instagram', 'tiktok', 'twitter', 'gmail', 'youtube'];
 
     public static function checkSettings()
     {
