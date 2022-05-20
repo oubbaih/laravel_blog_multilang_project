@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Auth::routes();
 // DashBoard Routes Group
-Route::prefix('dashboard')->as('dashboard.')->middleware('auth')->group(function () {
+Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLoginStatus'])->group(function () {
     Route::get('/', DashboardController::class . '@index')->name('dashboard');
     // Dashboard Post ()
     Route::resource('post', PostController::class);
