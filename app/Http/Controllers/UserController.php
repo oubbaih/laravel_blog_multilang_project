@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function index()
     {
 
-        // dd($users);
+
         return view('dashboard.users.index');
     }
 
@@ -54,6 +55,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('dashboard.users.create');
     }
 
     /**
@@ -64,7 +66,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+        return redirect()->route('dashboard.user.index');
     }
 
     /**
@@ -87,7 +99,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        return view('dashboard.users.edit');
+        $user = User::findOrFail($id);
+        return view('dashboard.users.edit', compact('user'));
     }
 
     /**
@@ -97,9 +110,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
+        $request->validate([
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable'],
+            'password' => ['nullable'],
+        ]);
+        $user->name = $request['name'];
+        $user->email  = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        return back();
     }
 
     /**
