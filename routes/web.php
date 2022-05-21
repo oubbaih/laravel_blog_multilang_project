@@ -28,6 +28,7 @@ Auth::routes();
 Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLoginStatus'])->group(function () {
     Route::get('/', DashboardController::class . '@index')->name('dashboard');
     Route::get('/users/all', UserController::class . '@CheckAllUsers')->name('users.all');
+    Route::delete('/users/delete', UserController::class . '@delete')->name('users.delete');
     Route::resources([
         // Dashboard Post ()
         'post' => PostController::class,
