@@ -31,10 +31,12 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         $request->validate([
-            'id_use' => 'required'
+            'id_use' => 'required|numeric'
         ]);
-        $user = User::findOrFail($request->id_use);
-        $user->delete();
+
+        if (is_numeric($request->id_use)) {
+            User::where('id', $request->id_use)->delete();
+        }
         return back();
     }
     public function index()
@@ -85,6 +87,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        return view('dashboard.users.edit');
     }
 
     /**
