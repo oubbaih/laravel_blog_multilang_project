@@ -28,12 +28,12 @@
                                   class="icon-puzzle"></i>Create User</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="{{route('dashboard.user.index')}}"><i class="icon-puzzle"></i>View
+                          <a class="nav-link" href="{{route('dashboard.user.index')}}"><i class="icon-puzzle"></i>
                               All Users</a>
                       </li>
                   </ul>
               </li>
-               <li class="nav-item nav-dropdown">
+              <li class="nav-item nav-dropdown">
                   <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Settings </a>
                   <ul class="nav-dropdown-items">
                       <li class="nav-item">
@@ -42,6 +42,24 @@
                       </li>
                   </ul>
               </li>
+
+              {{-- //Categories Route  --}}
+
+              <li class="nav-item nav-dropdown">
+                  <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Categories </a>
+                  <ul class="nav-dropdown-items">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{route('dashboard.category.index')}}"><i
+                                  class="icon-puzzle"></i>All Categories</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{route('dashboard.category.create')}}"><i class="icon-puzzle"></i>
+                              Create Category</a>
+                      </li>
+                  </ul>
+              </li>
+
+
 
 
               <li class="nav-item nav-dropdown">

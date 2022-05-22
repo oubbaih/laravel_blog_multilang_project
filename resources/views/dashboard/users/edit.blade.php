@@ -51,6 +51,28 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        <div class="row mb-3" style="margin-bottom: 1rem;">
+                            <label  class="col-md-4 col-form-label text-md-end">Status</label>
+
+                            <div class="col-md-8">
+                                <select class="form-control" name="status">
+                                    <option value="admin"  @if ($user->status == 'admin')
+                                        selected
+                                    @endif >Admin</option>
+                                    <option value="writer" @if ($user->status == 'writer')
+                                        selected
+                                    @endif >Writer</option>
+                                    <option>No Status</option>
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="row mb-0" style="margin-bottom: 1rem;">
                             <div class="col-md-8 offset-md-4">

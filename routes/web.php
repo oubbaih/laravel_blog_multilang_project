@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashBoardController as ControllersDashBoardController;
+use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +26,15 @@ Route::get('/', function () {
 Auth::routes();
 // DashBoard Routes Group
 Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLoginStatus'])->group(function () {
-    Route::get('/', DashboardController::class . '@index')->name('dashboard');
+    Route::get('/', DashBoardController::class . '@index')->name('dashboard');
+    //Addictional Routes Of User Controller 
     Route::get('/users/all', UserController::class . '@CheckAllUsers')->name('users.all');
     Route::delete('/users/delete', UserController::class . '@delete')->name('users.delete');
+
+    //Additional Routes of Category Routes
+    Route::get('/category/all', CategoryController::class . '@CheckAllCategory')->name('category.all');
+    Route::delete('/category/delete', CategoryController::class . '@delete')->name('category.delete');
+    //===                           ===/
     Route::resources([
         // Dashboard Post ()
         'post' => PostController::class,
@@ -36,6 +42,8 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
         'user'  => UserController::class,
         //Settings 
         'setting' => SettingController::class,
+        //Categories SetUp 
+        'category' => CategoryController::class,
     ]);
 });
 

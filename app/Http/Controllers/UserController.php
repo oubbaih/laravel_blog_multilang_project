@@ -117,9 +117,11 @@ class UserController extends Controller
             'name' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable'],
             'password' => ['nullable'],
+            'status' => ['nullable'],
         ]);
         $user->name = $request['name'];
         $user->email  = $request['email'];
+        $user->status  = $request['status'];
         $user->password = Hash::make($request['password']);
         $user->save();
         return back();
