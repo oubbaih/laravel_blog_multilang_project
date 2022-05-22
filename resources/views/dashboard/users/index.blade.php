@@ -38,11 +38,11 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="id_use" id="id-name">
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </div>
+                    <p style="padding:2rem; text-align:center; font-size:2rem; text-transform:capitalize;">Are You Sure Want To Delete User</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
                 </form>
             </div>
         </div>
