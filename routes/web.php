@@ -32,7 +32,7 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
     Route::delete('/users/delete', UserController::class . '@delete')->name('users.delete');
 
     //Additional Routes of Category Routes
-    Route::get('/category/all', CategoryController::class . '@CheckAllCategory')->name('category.all');
+    Route::get('/category/all', CategoryController::class . '@CheckAllCategories')->name('category.all');
     Route::delete('/category/delete', CategoryController::class . '@delete')->name('category.delete');
     //===                           ===/
     Route::resources([

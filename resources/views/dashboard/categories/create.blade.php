@@ -16,6 +16,15 @@
                             <input id="fileinputid" class="form-control" name="image" type="file">
                         </div>
                     </div>
+                    <div class="form-group " style="margin-top:2rem">
+                        <label for="exampleFormControlSelect1">Example select</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="parent">
+                            <option value="0">Default Category</option>
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="card-block">
                     <ul class="nav nav-tabs" role="tablist">
@@ -31,7 +40,6 @@
                         <div class="tab-pane fade @if ($loop->index == 0)
                             show active in
                              @endif" id="{{$key}}" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                            <input type="hidden" name="author" value={{auth()->user()->id}}>
                             <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Category Title
                                 _{{$key}}</label>
                             <div class="controls">

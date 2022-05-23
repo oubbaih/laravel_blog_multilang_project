@@ -15,12 +15,12 @@ class Category extends Model implements TranslatableContract
     protected $fillable = ['parent', 'image'];
 
 
-    public function parents()
+    public function getParent()
     {
-        return $this->belongsTo(Category::class, 'parents');
+        return $this->belongsTo(Category::class, 'parent');
     }
     public function children()
     {
-        return $this->hasMany(Category::class, 'parents');
+        return $this->hasMany(Category::class, 'parent');
     }
 }

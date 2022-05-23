@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -19,7 +20,7 @@ class CategoryController extends Controller
 
     public function CheckAllCategories()
     {
-        $data = Category::select('*')->with('parents');
+        $data = Category::select('*')->with('getParent');
         return   DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -27,9 +28,15 @@ class CategoryController extends Controller
                 <a  id="deleteBtn" data-id="' . $row->id . '" onClick="clickFinc()" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-trash"></i>Delete</a></div>';
                 return  $btn;
             })
+            ->addColumn('title', function ($row) {
+                return $row->translate(app()->getLocale())->title;
+            })
+            ->addColumn('content', function ($row) {
+                return $row->translate(app()->getLocale())->content;
+            })
 
 
-            ->rawColumns(['actions'])
+            ->rawColumns(['actions', 'title', 'content'])
             ->make(true);
     }
     public function delete(Request $request)
@@ -53,6 +60,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        return view('dashboard.categories.index');
     }
 
     /**
@@ -63,7 +71,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('dashboard.categories.create');
+        $categories = Category::all();
+        return view('dashboard.categories.create', compact('categories'));
     }
 
     /**
@@ -75,6 +84,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $category =  Category::create($request->except('image', '_token'));
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $file_name = Str::uuid() . $file->getClientOriginalName();
+            $file->move(public_path('images'), $file_name);
+            $path = 'images/' . $file_name;
+            $category->update(['image' => $path]);
+        }
+        return redirect(route('dashboard.category.index'));
     }
 
     /**
@@ -97,6 +117,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        $category = Category::where('id', $id)->first();
+
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
@@ -106,9 +129,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         //
+        $category->update($request->except('image', '_token'));
+        if ($request->hasFile('image')) {
+            if (file_exists(public_path() . $category->image)) {
+                unlink(public_path() . $category->image);
+            }
+            $file = $request->file('image');
+            $filename = Str::uuid() . $file->getclientoriginalName();
+            $file->move(public_path('images'), $filename);
+            $path = '/images/' . $filename;
+            $category->update(['image' => $path]);
+        }
+        return redirect()->route('dashboard.category.index');
     }
 
     /**

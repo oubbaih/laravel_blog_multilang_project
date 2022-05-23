@@ -13,13 +13,13 @@
                 <table class="table-bordered table-striped table-condensed table" id="example">
                     <thead>
                         <tr>
-                            <th>Category Id</th>
-                            <th>Category Title</th>
-                            <th>Category Parent</th>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Parent</th>
                             <th>created_at</th>
                             <th>updated_at</th>
                             <th>Actions</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -37,7 +37,7 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="id_use" id="id-name">
-                    <p style="padding:2rem; text-align:center; font-size:2rem; text-transform:capitalize;">Are You Sure Want To Delete User</p>
+                    <p style="padding:2rem; text-align:center; font-size:2rem; text-transform:capitalize;">Are You Sure Want To Delete Category</p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -69,6 +69,14 @@
                     {
                         data: 'title',
                         name: 'title',
+                    },
+                    {
+                        data: 'content',
+                        name: 'content',
+                    },
+                    {
+                        data: 'parent',
+                        name: 'parent',
                     },
                     {
                         data: 'created_at',
