@@ -1,104 +1,83 @@
 <x-dashboard-master>
-    @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTable.min.css') }}">
 
-    @endsection
     @section('main')
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> Combined All Table
-            </div>
-            <div class="card-block">
-                <table class="table-bordered table-striped table-condensed table" id="example">
-                    <thead>
-                        <tr>
-                            <th>Category Id</th>
-                            <th>Category Title</th>
-                            <th>Category Parent</th>
-                            <th>created_at</th>
-                            <th>updated_at</th>
-                            <th>Actions</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    {{-- Model Setup  --}}
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{route('dashboard.users.delete')}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id_use" id="id-name">
-                    <p style="padding:2rem; text-align:center; font-size:2rem; text-transform:capitalize;">Are You Sure Want To Delete User</p>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+    <form action="{{route('dashboard.category.store')}}" method="post" id="form">
+        @csrf
+        <div class="col-lg-12">
+            <div class="card">
+                <h6 class="card-header text-capitalize">
+                    <i class="fa fa-align-justify"></i>
+                    Create Category
+                </h6>
+                <div class="container">
+                    <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Image Category</label>
+                    <div class="controls">
+                        <div class="input-group">
+                            <input id="fileinputid" class="form-control" name="image" type="file">
+                        </div>
                     </div>
-                </form>
+                </div>
+                <div class="card-block">
+                    <ul class="nav nav-tabs" role="tablist">
+                        @foreach (config('app.languages') as $key=>$lang)
+                        <li class="nav-item">
+                            <a class="nav-link @if ($loop->index == 0) active @endif" data-toggle="tab" href="#{{$key}}"
+                                role="tab">{{$lang}}</i></a>
+                        </li>
+                        @endforeach
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        @foreach (config('app.languages') as $key=>$lang)
+                        <div class="tab-pane fade @if ($loop->index == 0)
+                            show active in
+                             @endif" id="{{$key}}" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            <input type="hidden" name="author" value={{auth()->user()->id}}>
+                            <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Category Title
+                                _{{$key}}</label>
+                            <div class="controls">
+                                <div class="input-group">
+                                    <input id="posttitleid" class="form-control" name="{{$key}}[title]" type="text">
+                                </div>
+                            </div>
+                            <label class="form-control-label" style="margin-top:2rem;" for="postContentid">Category
+                                Content</label>
+                            <div class="controls">
+                                <div class="input-group">
+                                    <textarea id="postContentid" class="form-control" name="{{$key}}[content]"
+                                        rows=25></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <button class="btn btn-primary btn-block " id="submit" style="margin-top:2rem;"
+                                type="submit">submit</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="btn btn-danger btn-block " style="margin-top:2rem;" onclick="resetFun(event)"
+                                type="button" id="reset">reset</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-
+    </form>
     @endsection
-    @push('javascript')
-    <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.dataTable.min.js') }}"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            $('#example').dataTable({
-                processing: true,
-                serverSide: true,
-                order: [
-                    [0, "desc"]
-                ],
-                ajax: "{{route('dashboard.category.all')}}",
-                columns: [{
-                        data: 'id',
-                        name: 'id',
-                    },
-                    {
-                        data: 'title',
-                        name: 'title',
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at',
-                    },
-                    {
-                        data: 'updated_at',
-                        name: 'updated_at',
-                    },
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                    },
-                ]
-            });
-        });
-        // $('#deleteBtn').on('click'  , function(event){
-        //     // var id = $(this).attr('data-id');
-        //     // $('#deletemodel  #id').val(id); 
-        //     console.log('btn');
-        // } )
-        function clickFinc() {
-            let element = document.getElementById('deleteBtn');
-            let id = element.getAttribute('data-id');
-            let inputHiddenId = document.getElementById('id-name');
-            inputHiddenId.value = id;
-
-            console.log(inputHiddenId);
+    @section('scripts')
+    <script>
+        function resetFun(e) {
+            let inputs = document.querySelectorAll('input[type=text]');
+            let textarea = document.querySelectorAll('textarea');
+            let inputArea = [...inputs, ...textarea];
+            e.preventDefault();
+            for (let element of inputArea) {
+                element.value = '';
+            }
         }
 
     </script>
-    @endpush
+
+    @endsection
 </x-dashboard-master>

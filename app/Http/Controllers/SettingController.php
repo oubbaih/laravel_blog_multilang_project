@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -90,7 +91,10 @@ class SettingController extends Controller
         $request->validate($data);
 
         $setting->update($request->except('image', 'favicon', '_token'));
-        if ($request->file('logo')) {
+        if ($request->hasFile('logo')) {
+            if (file_exists(public_path() . $setting->favicon)) {
+                unlink(public_path() . $setting->favicon);
+            }
             $file = $request->file('logo');
             $filename = Str::uuid() . $file->getclientoriginalName();
             $file->move(public_path('images'), $filename);
@@ -98,6 +102,10 @@ class SettingController extends Controller
             $setting->update(['logo' => $path]);
         }
         if ($request->file('favicon')) {
+            // dd(public_path() . $setting->favicon);
+            if (file_exists(public_path() . $setting->favicon)) {
+                unlink(public_path() . $setting->favicon);
+            }
             $file = $request->file('favicon');
             $filename = Str::uuid() . $file->getclientoriginalName();
             $file->move(public_path('images'), $filename);
