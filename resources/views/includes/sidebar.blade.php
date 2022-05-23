@@ -54,7 +54,7 @@
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="{{route('dashboard.category.create')}}"><i class="icon-puzzle"></i>
-                              Create Category</a>
+                              Add Category</a>
                       </li>
                   </ul>
               </li>

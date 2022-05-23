@@ -46,7 +46,11 @@ class CategoryController extends Controller
         ]);
 
         if (is_numeric($request->id_use)) {
-            Category::where('id', $request->id_use)->delete();
+            $category = Category::where('id', $request->id_use)->first();
+            if (file_exists(public_path() . $category->image) && $category->image != null) {
+                unlink(public_path() . $category->image);
+            }
+            $category->delete();
         }
         return back();
     }
@@ -88,10 +92,11 @@ class CategoryController extends Controller
 
         $category =  Category::create($request->except('image', '_token'));
         if ($request->hasFile('image')) {
+
             $file = $request->file('image');
-            $file_name = Str::uuid() . $file->getClientOriginalName();
-            $file->move(public_path('images'), $file_name);
-            $path = 'images/' . $file_name;
+            $filename = Str::uuid() . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $path = '/images/' . $filename;
             $category->update(['image' => $path]);
         }
         return redirect(route('dashboard.category.index'));
@@ -134,11 +139,11 @@ class CategoryController extends Controller
         //
         $category->update($request->except('image', '_token'));
         if ($request->hasFile('image')) {
-            if (file_exists(public_path() . $category->image)) {
+            if (file_exists(public_path() . $category->image) && $category->image != null) {
                 unlink(public_path() . $category->image);
             }
             $file = $request->file('image');
-            $filename = Str::uuid() . $file->getclientoriginalName();
+            $filename = Str::uuid() . $file->getClientOriginalName();
             $file->move(public_path('images'), $filename);
             $path = '/images/' . $filename;
             $category->update(['image' => $path]);

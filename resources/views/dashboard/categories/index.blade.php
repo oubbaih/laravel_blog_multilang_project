@@ -33,7 +33,7 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{route('dashboard.users.delete')}}" method="post">
+                <form action="{{route('dashboard.category.delete')}}" method="post">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="id_use" id="id-name">

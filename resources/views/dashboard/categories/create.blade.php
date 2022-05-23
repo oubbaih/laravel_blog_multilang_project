@@ -1,7 +1,7 @@
 <x-dashboard-master>
 
     @section('main')
-    <form action="{{route('dashboard.category.store')}}" method="post" id="form">
+    <form action="{{route('dashboard.category.store')}}" method="post" id="form" enctype="multipart/form-data">
         @csrf
         <div class="col-lg-12">
             <div class="card">
