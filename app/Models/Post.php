@@ -13,5 +13,5 @@ class Post extends Model implements TranslatableContract
     use Translatable;
     use HasFactory;
     public $translatedAttributes = ['title', 'content'];
-    protected $fillable = ['author'];
+    protected $fillable = ['category_id', 'user_id', 'image'];
 }

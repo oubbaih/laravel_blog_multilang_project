@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -16,6 +17,7 @@ class PostController extends Controller
     public function index()
     {
         //
+
         $posts = Post::all();
         return view('dashboard.post.index', compact('posts'));
     }
@@ -27,8 +29,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('dashboard.post.create');
+        $categories  = Category::all();
+        // dd(count($categories));
+        if (count($categories) > 0) {
+
+            return view('dashboard.post.create');
+        }
+        return abort(404);
     }
 
     /**
@@ -40,9 +47,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request->all());
-        Post::create($request->all());
 
+        $post = Post::create($request->except('_token', 'image'));
         return back();
     }
 

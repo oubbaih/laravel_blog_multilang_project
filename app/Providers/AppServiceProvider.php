@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,11 +26,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $settings = Setting::checkSettings();
-        $categories = Category::all();
-        view()->share([
-            'settings' => $settings,
-            'categories' => $categories
-        ]);
+        if (Schema::hasTable('settings') &&  Schema::hasTable('categories')) {
+            $settings = Setting::checkSettings();
+            $categories = Category::all();
+            view()->share([
+                'settings' => $settings,
+                'categories' => $categories
+            ]);
+        }
     }
 }

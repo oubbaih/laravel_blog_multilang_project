@@ -1,7 +1,10 @@
 <x-dashboard-master>
+    @section('styles')
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 
+    @endsection
     @section('main')
-    <form action="{{route('dashboard.post.store')}}" method="post" id="form">
+    <form action="{{route('dashboard.post.store')}}" method="post" id="form" enctype="multipart/form-data">
         @csrf
         <div class="col-lg-12">
             <div class="card">
@@ -9,8 +12,23 @@
                     <i class="fa fa-align-justify"></i>
                     create post
                 </h6>
+
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                 <div class="card-block">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Image Post</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                    </div>
+                    <div class="form-group " style="margin-top:2rem">
+                        <label for="exampleFormControlSelect1">Categories</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+                            <option value="0">Default Category</option>
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <ul class="nav nav-tabs" role="tablist" style="margin-top:2rem">
                         @foreach (config('app.languages') as $key=>$lang)
                         <li class="nav-item">
                             <a class="nav-link @if ($loop->index == 0) active @endif" data-toggle="tab" href="#{{$key}}"
@@ -23,7 +41,6 @@
                         <div class="tab-pane fade @if ($loop->index == 0)
                             show active in
                              @endif" id="{{$key}}" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                            <input type="hidden" name="author" value={{auth()->user()->id}}>
                             <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">Post Title
                                 _{{$key}}</label>
                             <div class="controls">
@@ -36,7 +53,7 @@
                             <div class="controls">
                                 <div class="input-group">
                                     <textarea id="postContentid" class="form-control" name="{{$key}}[content]"
-                                        rows=25></textarea>
+                                        rows="25"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +75,8 @@
     </form>
     @endsection
     @section('scripts')
-    <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
+    {{-- <script src="{{asset('js/ckeditor/ckeditor.min.js')}}"></script> --}}
+
     <script>
         function resetFun(e) {
             let inputs = document.querySelectorAll('input[type=text]');
@@ -69,14 +87,11 @@
                 element.value = '';
             }
         }
-        ClassicEditor
-            .create(document.querySelector('#postContentid'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        var allEditors = document.querySelectorAll('#postContentid');
+        for (i = 0; i <= allEditors.length; i++) {
+            ClassicEditor
+                .create(allEditors[i]);
+        }
 
     </script>
 
