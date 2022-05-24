@@ -25,7 +25,7 @@ class CategoryController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $btn = '<div style="display:flex;justify-content:space-between;flex-direction:row;"> <a href="' . Route('dashboard.category.edit', $row->id) . '"   class="btn btn-primary"> <i class="fa fa-edit"></i>Edit</a>
-                <a  id="deleteBtn" data-id="' . $row->id . '" onClick="clickFinc()" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-trash"></i>Delete</a></div>';
+                <a  id="deleteBtn" data-id="' . $row->parent . '" onClick="clickFinc()" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-trash"></i>Delete</a></div>';
                 return  $btn;
             })
             ->addColumn('title', function ($row) {
@@ -48,14 +48,32 @@ class CategoryController extends Controller
         ]);
 
         if (is_numeric($request->id_use)) {
-            $category = Category::where('parent', 0)->first();
-            Category::where('id', $request->id_use)->delete();
-            if (file_exists(public_path() . $category->image)) {
-                unlink(public_path() . $category->image);
+            if ($request->id_use > 0) {
+                $cate2 = Category::where('parent', $request->id_use)->first();
+
+                if (file_exists(public_path() . $cate2->image) && $cate2->image != null) {
+                    unlink(public_path() . $cate2->image);
+                }
+                $cate2->delete();
+                return back();
+            } else {
+                $category = Category::where('parent', 0)->first();
+                if (file_exists(public_path() . $category->image)) {
+                    unlink(public_path() . $category->image);
+                }
+                $allChildren = Category::where('parent', $request->id_use);
+
+                foreach ($allChildren as $child) {
+                    if (file_exists(public_path() . $child->image)) {
+                        unlink(public_path() . $child->image);
+                    }
+                    $child->delete();
+                }
+
+                $category->delete();
+                return back();
             }
-            $category->delete();
         }
-        return back();
     }
 
 
