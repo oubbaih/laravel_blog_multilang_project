@@ -35,7 +35,12 @@ class PostController extends Controller
         ]);
 
         if (is_numeric($request->id_use)) {
-            Post::where('id', $request->id_use)->delete();
+            $post = Post::where('id', $request->id_use)->first();
+            // dd(public_path() . '/'  . $post->image);
+            if (file_exists(public_path() . '/'  . $post->image) && $post->image != null) {
+                unlink(public_path() . '/'  . $post->image);
+            }
+            $post->delete();
         }
         return back();
     }
@@ -115,6 +120,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::where('id', $id)->first();
+        return view('dashboard.post.edit', compact('post'));
     }
 
     /**
@@ -124,9 +131,21 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
+        $post->update($request->except('image', '_token'));
+        if ($request->file('image')) {
+            if (file_exists(public_path() . '/'  . $post->image)) {
+                unlink(public_path() . '/'  . $post->image);
+            }
+            $file = $request->file('image');
+            $filename = Str::uuid() . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $path = 'images/' . $filename;
+            $post->update(['image' => $path]);
+        }
+        return back();
     }
 
     /**

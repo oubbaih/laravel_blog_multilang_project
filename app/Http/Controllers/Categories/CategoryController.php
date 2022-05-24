@@ -49,9 +49,7 @@ class CategoryController extends Controller
 
         if (is_numeric($request->id_use)) {
             if ($request->id_use > 0) {
-                dd($request->id_use);
                 $cate2 = Category::where('parent', $request->id_use)->first();
-
                 if (file_exists(public_path() . $cate2->image) && $cate2->image != null) {
                     unlink(public_path() . $cate2->image);
                 }
