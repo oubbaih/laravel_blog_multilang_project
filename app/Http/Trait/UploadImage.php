@@ -1,6 +1,7 @@
 <?php
 
 
+
 trait UploadImage
 {
 

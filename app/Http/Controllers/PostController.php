@@ -3,12 +3,48 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Yajra\DataTables\Facades\DataTables;
 
 class PostController extends Controller
 {
+
+    public function CheckAllPost()
+    {
+        $data = Post::select('*');
+        // dd($data);
+        return   DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $btn = '<div style="display:flex;justify-content:space-between;flex-direction:row;"> <a href="' . Route('dashboard.post.edit', $row->id) . '"   class="btn btn-primary"> <i class="fa fa-edit"></i>Edit</a>
+                <a  id="deleteBtn" data-id="' . $row->id . '" onClick="clickFinc()" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-trash"></i>Delete</a></div>';
+                return  $btn;
+            })
+
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id_use' => 'required|numeric'
+        ]);
+
+        if (is_numeric($request->id_use)) {
+            Post::where('id', $request->id_use)->delete();
+        }
+        return back();
+    }
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -49,6 +85,13 @@ class PostController extends Controller
         //
 
         $post = Post::create($request->except('_token', 'image'));
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = Str::uuid() . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $path = 'images/' . $filename;
+            $post->update(['image' => $path]);
+        }
         return back();
     }
 

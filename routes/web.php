@@ -34,6 +34,10 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
     //Additional Routes of Category Routes
     Route::get('/category/all', CategoryController::class . '@CheckAllCategories')->name('category.all');
     Route::delete('/category/delete', CategoryController::class . '@delete')->name('category.delete');
+    // Additional Posts Routes 
+    Route::get('/post/all', PostController::class . '@CheckAllPost')->name('post.all');
+    Route::delete('/post/delete', PostController::class . '@delete')->name('post.delete');
+
     //===                           ===/
     Route::resources([
         // Dashboard Post ()
