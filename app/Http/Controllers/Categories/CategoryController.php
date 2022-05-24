@@ -34,7 +34,9 @@ class CategoryController extends Controller
             ->addColumn('content', function ($row) {
                 return $row->translate(app()->getLocale())->content;
             })
-
+            // ->addColumn('parent' ,  function($row){
+            //     return $row->
+            // })
 
             ->rawColumns(['actions', 'title', 'content'])
             ->make(true);
@@ -46,8 +48,9 @@ class CategoryController extends Controller
         ]);
 
         if (is_numeric($request->id_use)) {
-            $category = Category::where('id', $request->id_use)->first();
-            if (file_exists(public_path() . $category->image) && $category->image != null) {
+            $category = Category::where('parent', 0)->first();
+            Category::where('id', $request->id_use)->delete();
+            if (file_exists(public_path() . $category->image)) {
                 unlink(public_path() . $category->image);
             }
             $category->delete();
@@ -75,7 +78,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        $categories = Category::all();
+        $categories = Category::whereNull('parent')->orWhere('parent', 0)->get();
         return view('dashboard.categories.create', compact('categories'));
     }
 
