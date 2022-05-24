@@ -58,6 +58,7 @@
     </form>
     @endsection
     @section('scripts')
+    <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
     <script>
         function resetFun(e) {
             let inputs = document.querySelectorAll('input[type=text]');
@@ -68,6 +69,14 @@
                 element.value = '';
             }
         }
+        ClassicEditor
+            .create(document.querySelector('#postContentid'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
     </script>
 

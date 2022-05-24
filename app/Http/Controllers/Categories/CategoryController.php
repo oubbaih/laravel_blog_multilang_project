@@ -34,11 +34,11 @@ class CategoryController extends Controller
             ->addColumn('content', function ($row) {
                 return $row->translate(app()->getLocale())->content;
             })
-            // ->addColumn('parent' ,  function($row){
-            //     return $row->
-            // })
+            ->addColumn('parent',  function ($row) {
+                return $row->parent;
+            })
 
-            ->rawColumns(['actions', 'title', 'content'])
+            ->rawColumns(['actions', 'title', 'content', 'parent'])
             ->make(true);
     }
     public function delete(Request $request)
@@ -49,6 +49,7 @@ class CategoryController extends Controller
 
         if (is_numeric($request->id_use)) {
             if ($request->id_use > 0) {
+                dd($request->id_use);
                 $cate2 = Category::where('parent', $request->id_use)->first();
 
                 if (file_exists(public_path() . $cate2->image) && $cate2->image != null) {
@@ -56,7 +57,9 @@ class CategoryController extends Controller
                 }
                 $cate2->delete();
                 return back();
-            } else {
+            } else if ($request->id_use === 0) {
+                dd($request->id_use);
+
                 $category = Category::where('parent', 0)->first();
                 if (file_exists(public_path() . $category->image)) {
                     unlink(public_path() . $category->image);
