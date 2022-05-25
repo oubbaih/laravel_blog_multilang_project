@@ -14,4 +14,8 @@ class Post extends Model implements TranslatableContract
     use HasFactory;
     public $translatedAttributes = ['title', 'content'];
     protected $fillable = ['category_id', 'user_id', 'image'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
