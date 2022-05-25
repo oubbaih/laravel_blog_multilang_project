@@ -1,23 +1,40 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<body>
+    <h1>{{__('word.home')}}</h1>
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+            aria-expanded="false">Languages</a>
+        <div class="dropdown-menu">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+            @endforeach
         </div>
-    </div>
-</div>
-@endsection
+    </li>
+
+
+    @if ($posts)
+        @foreach ($posts as $post)
+            <h1>{{$post->title}}</h1>
+            <img src="{{asset($post->image)}}" alt="{{$post->title}}">
+            <p>{!! $post->content !!}</p>
+        @endforeach
+        <img src="{{}}" alt="">
+        
+    @endif
+
+</body>
+
+</html>

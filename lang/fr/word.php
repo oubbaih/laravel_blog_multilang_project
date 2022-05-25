@@ -1,5 +1,6 @@
 <?php
 
 return [
-  'dashboard' => 'tableau de bord'
+  'dashboard' => 'tableau de bord',
+  'home' => 'domicile'
 ];

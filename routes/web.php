@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 Auth::routes();
 // DashBoard Routes Group
@@ -50,7 +50,3 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
         'category' => CategoryController::class,
     ]);
 });
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
