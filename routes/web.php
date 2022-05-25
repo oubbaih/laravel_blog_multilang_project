@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\frontend\PostController as FrontendPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
@@ -20,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+//FrontEnd Route Resource For Post
+Route::resource('post', FrontendPostController::class);
 
 Auth::routes();
 // DashBoard Routes Group
