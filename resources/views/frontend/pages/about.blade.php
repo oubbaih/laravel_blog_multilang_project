@@ -1,4 +1,8 @@
 <x-frontend-master>
+      @section('header')
+    <h1>{{$about->title}}</h1>
+    {{-- <span class="subheading">{{$settings->content}}</span> --}}
+    @endsection
 @section('post')
         <!-- Main Content-->
         <main class="mb-4">

@@ -24,7 +24,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">LahcenOubbaih</a>
+            <a class="navbar-brand" href="/">LahcenOubbaih</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -36,12 +36,20 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
                             href="index.html">{{$category->title}}</a></li>
                     @endforeach
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('about')}}">About</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                            href="{{route('contact')}}">Contact</a>
+                    </li>
                     @if (auth()->user())
-
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                            href="/dashboard">DashBoard</a>
+                    </li>
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <li class="nav-item">
-                            <button class="nav-link " style="background:none; color:#fff; border: none;font-family: inherit;font-size: inherit;padding-top: 1rem !important; font-weight:600" >Logout</button>
+                            <button class="nav-link "
+                                style="background:none; color:#fff; border: none;font-family: inherit;font-size: inherit;padding-top: 1rem !important; font-weight:600">Logout</button>
                         </li>
                     </form>
 
@@ -81,8 +89,7 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <h1>{{$settings->title}}</h1>
-                        <span class="subheading">{{$settings->content}}</span>
+                        @yield('header')
                     </div>
                 </div>
             </div>
@@ -130,7 +137,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; eoubbaih@gmail.com</div>
                 </div>
             </div>
         </div>

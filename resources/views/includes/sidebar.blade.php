@@ -63,15 +63,11 @@
                   <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
                   <ul class="nav-dropdown-items">
                       <li class="nav-item">
-                          <a class="nav-link" href="{{route('dashboard.about.index')}}" target="_top"><i class="icon-star"></i> About </a>
+                          <a class="nav-link" href="{{route('dashboard.about.index')}}" ><i class="icon-star"></i> About </a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="{{route('dashboard.contact.index')}}" target="_top"><i class="icon-star"></i>
+                          <a class="nav-link" href="{{route('dashboard.contact.index')}}" ><i class="icon-star"></i>
                               contact</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error
-                              404</a>
                       </li>
                   </ul>
               </li>

@@ -4,9 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ContactController extends Controller
 {
+
+
+    public function CheckAllContacts()
+    {
+        $data = Contact::select('*');
+        return   DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $btn = '<div style="display:flex;justify-content:space-between;flex-direction:row;"> <a href="' . Route('dashboard.contact.edit', $row->id) . '"   class="btn btn-primary"> <i class="fa fa-edit"></i>Edit</a><a  id="deleteBtn" data-id="' . $row->id . '" onClick="clickFinc()" class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-trash"></i>Delete</a></div>';
+                return  $btn;
+            })
+
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id_use' => 'required|numeric'
+        ]);
+
+        if (is_numeric($request->id_use)) {
+            Contact::where('id', $request->id_use)->delete();
+        }
+        return back();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +44,7 @@ class ContactController extends Controller
     public function index()
     {
         //
-        return view('dashboard.pages.contact.index');
+        return view('dashboard.contact.index');
     }
 
     /**
@@ -37,6 +66,14 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'email' => 'required|email',
+            'name' => 'required',
+            'message' => 'required'
+        ]);
+
+        Contact::create($request->except('_token'));
+        return back();
     }
 
     /**
@@ -59,6 +96,7 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         //
+        return view('dashboard.contact.edit', compact('contact'));
     }
 
     /**

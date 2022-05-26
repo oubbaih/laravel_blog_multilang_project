@@ -8,6 +8,7 @@ use App\Http\Controllers\frontend\PostController as FrontendPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //FrontEnd Route Resource For Post
 Route::resource('post', FrontendPostController::class);
-
+//Show FronEnd About Page 
+Route::get('about',  function () {
+    return view('frontend.pages.about');
+})->name('about');
+//Show FronEnd Caontact Page 
+Route::get('contact',  function () {
+    return view('frontend.pages.contact');
+})->name('contact');
 Auth::routes();
 // DashBoard Routes Group
 Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLoginStatus'])->group(function () {
@@ -40,6 +48,9 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
     // Additional Posts Routes 
     Route::get('/post/all', PostController::class . '@CheckAllPost')->name('post.all');
     Route::delete('/post/delete', PostController::class . '@delete')->name('post.delete');
+    // Additional Contact Routes 
+    Route::get('/contact/all', ContactController::class . '@CheckAllContacts')->name('contact.all');
+    Route::delete('/contact/delete', PostController::class . '@delete')->name('contact.delete');
 
 
     //===                           ===/
