@@ -24,7 +24,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand" href="index.html">LahcenOubbaih</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -37,17 +37,19 @@
                             href="index.html">{{$category->title}}</a></li>
                     @endforeach
                     @if (auth()->user())
-                    <li class="nav-item">
-                        <form action="{{route('logout')}}" method="post">
-                            @csrf
-                            @method('delete')
-                        <button class="nav-link px-lg-3 py-3 py-lg-4">Logout</button>
-                        </form>
-                    </li>
+
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <li class="nav-item">
+                            <button class="nav-link " style="background:none; color:#fff; border: none;font-family: inherit;font-size: inherit;padding-top: 1rem !important; font-weight:600" >Logout</button>
+                        </li>
+                    </form>
+
                     @else
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('login')}}">Login</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('register')}}">Register</a>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                            href="{{route('register')}}">Register</a>
                     </li>
                     @endif
 
