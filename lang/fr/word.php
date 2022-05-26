@@ -2,5 +2,6 @@
 
 return [
   'dashboard' => 'tableau de bord',
-  'home' => 'domicile'
+  'home' => 'domicile',
+  'about' => 'à propos',
 ];

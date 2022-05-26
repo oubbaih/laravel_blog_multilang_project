@@ -2,5 +2,6 @@
 
 return [
   'dashboard' => 'dashboard',
-  'home' => 'home'
+  'home' => 'home',
+  'about' => 'about',
 ];
