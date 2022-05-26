@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\frontend\PostController as FrontendPostController;
 use App\Http\Controllers\PostController;
@@ -39,6 +41,7 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
     Route::get('/post/all', PostController::class . '@CheckAllPost')->name('post.all');
     Route::delete('/post/delete', PostController::class . '@delete')->name('post.delete');
 
+
     //===                           ===/
     Route::resources([
         // Dashboard Post ()
@@ -49,5 +52,9 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'CheckUserLogi
         'setting' => SettingController::class,
         //Categories SetUp 
         'category' => CategoryController::class,
+        //About Us Page Setup
+        'about'  => AboutController::class,
+        //Contact Page setup
+        'contact' => ContactController::class,
     ]);
 });

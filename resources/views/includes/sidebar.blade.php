@@ -87,11 +87,11 @@
                   <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
                   <ul class="nav-dropdown-items">
                       <li class="nav-item">
-                          <a class="nav-link" href="pages-login.html" target="_top"><i class="icon-star"></i> Login</a>
+                          <a class="nav-link" href="{{route('dashboard.about.index')}}" target="_top"><i class="icon-star"></i> About </a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="pages-register.html" target="_top"><i class="icon-star"></i>
-                              Register</a>
+                              contact</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\About;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Setting;
@@ -31,10 +32,12 @@ class AppServiceProvider extends ServiceProvider
             $settings = Setting::checkSettings();
             $categories = Category::all();
             $posts = Post::paginate(5);
+            $about = About::checkAboutPage();
             view()->share([
                 'settings' => $settings,
                 'categories' => $categories,
                 'posts' => $posts,
+                'about' => $about
             ]);
         }
     }

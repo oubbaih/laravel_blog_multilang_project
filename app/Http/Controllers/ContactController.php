@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\About;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class AboutController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class AboutController extends Controller
     public function index()
     {
         //
-        return view('dashboard.pages.about.index');
+        return view('dashboard.pages.contact.index')
     }
 
     /**
@@ -42,10 +42,10 @@ class AboutController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(About $about)
+    public function show(Contact $contact)
     {
         //
     }
@@ -53,10 +53,10 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(About $about)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -65,10 +65,10 @@ class AboutController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, About $about)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -76,10 +76,10 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\About  $about
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(About $about)
+    public function destroy(Contact $contact)
     {
         //
     }
