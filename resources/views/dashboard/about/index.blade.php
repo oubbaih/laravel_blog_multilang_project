@@ -21,13 +21,13 @@
                     <i class="fa fa-align-justify"></i>
                      about us
                 </h6>
+                   <img src="{{asset($about->image)}}" style="width:200px;" alt="">
                 <div style="padding:0rem 1.5rem 1.5rem 1.5rem;">
                     <label class="form-control-label " style="margin-top:2rem;" for="posttitleid">About Us Image</label>
                     <div class="controls">
                         <div class="input-group d-flex">
-                            <input id="posttitleid" class="form-control" placeholder="Logo Link" name="logo"
+                            <input id="posttitleid" class="form-control" placeholder="Logo Link" name="image"
                                 type="file">
-                            <img src="{{asset($about->image)}}" style="width:200px;" alt="">
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AboutController extends Controller
 {
@@ -71,6 +72,18 @@ class AboutController extends Controller
     public function update(Request $request, About $about)
     {
         //
+        $about->update($request->except('_token', 'image'));
+        if ($request->hasFile('image')) {
+            if (file_exists(public_path() . $about->image) && $about->image != null) {
+                unlink(public_path() . $about->image);
+            }
+            $file = $request->file('image');
+            $filename = Str::uuid() . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $path = '/images/' . $filename;
+            $about->update(['image' => $path]);
+        }
+        return back();
     }
 
     /**
